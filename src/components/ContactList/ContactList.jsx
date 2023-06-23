@@ -1,7 +1,7 @@
 import ContactListItem from 'components/ContactListItem/ContactListItem';
 import React, { useEffect } from 'react';
 import css from './ContactList.module.css';
-
+// import csstitle from './styleMain/styleMaine.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/store';
 
@@ -23,6 +23,11 @@ export default function ContactList() {
 
   return (
     <div className="contactList">
+      <h4
+      // className={csstitle.titleSecond}
+      >
+        Contacts
+      </h4>
       <ul className={css.contactList}>
         {contacts
           .filter(contact => {
