@@ -6,16 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getContacts } from 'redux/store';
 
 export default function ContactList() {
+  const isAuth = useSelector(state => state.auth.access_token);
+
   const contacts = useSelector(store => store.contacts.contacts.items);
   const filterValue = useSelector(state => state.contacts.filter);
-  console.log('all contacts from state', contacts);
-  console.log('filterValue from state', filterValue);
+  // console.log('all contacts from state', contacts);
+  // console.log('filterValue from state', filterValue);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContacts());
-  }, [dispatch]);
+    isAuth && dispatch(getContacts());
+  }, [dispatch, isAuth]);
 
   if (contacts === null) {
     return null;

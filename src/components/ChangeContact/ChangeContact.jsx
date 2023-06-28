@@ -1,19 +1,28 @@
-import React, { useEffect, useState } from 'react';
-// import csstitle from './styleMain/styleMaine.module.css';
-
-import css from './PhoneBookForm.module.css';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postContact } from 'redux/store';
-import { handleFullfild } from 'redux/auth/slice';
-// import { addContactAction } from 'components/actions';
-// import { addContact } from 'redux/store';
+import { changeContact, changeContactThunk, getContacts } from 'redux/store';
 
-export function PhoneBookForm() {
+export default function ChangeContact({ id }) {
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const state = useSelector(state => state.contacts);
 
+  const chengedContactData = {
+    id,
+    name: contactName,
+    number: contactNumber,
+  };
+
   const dispatch = useDispatch();
+  // const id = key;
+
+  // useEffect(() => {
+  //   if (id) {
+  //     dispatch(changeContactThunk(chengedContactData)).then(() => {
+  //       dispatch(getContacts());
+  //     });
+  //   }
+  // }, [dispatch, id, chengedContactData]);
 
   const handlerChenge = event => {
     const { value } = event.currentTarget;
@@ -21,7 +30,6 @@ export function PhoneBookForm() {
       ? setContactName(value)
       : setContactNumber(value);
   };
-
   const clearForm = () => {
     setContactName('');
     setContactNumber('');
@@ -29,40 +37,20 @@ export function PhoneBookForm() {
 
   const handlerSubmit = event => {
     event.preventDefault();
-    const unicContactSearch = state.contacts.items.some(
-      contact => contact.name === contactName
-    );
 
-    if (unicContactSearch) {
-      alert(`${contactName} is already in contacts`);
-      return;
-    }
+    // console.log('in chenge contact', id, chengedContactData);
 
-    dispatch(
-      postContact({
-        name: contactName,
-        number: contactNumber,
-      })
-    );
-
-    clearForm();
+    dispatch(changeContactThunk(chengedContactData)).then(() => {
+      dispatch(getContacts());
+      clearForm();
+    });
   };
-
   return (
     <div>
-      <h3
-      // className={csstitle.title}
-      >
-        Phone book
-      </h3>
-      <form
-        action=""
-        autoComplete="on"
-        onSubmit={handlerSubmit}
-        className={css.form}
-      >
+      <h3>Chenge contact</h3>
+      <form action="" onSubmit={handlerSubmit}>
         {' '}
-        <label htmlFor="" className={css.formLable}>
+        <label htmlFor="">
           {' '}
           Name
           <input
@@ -73,7 +61,7 @@ export function PhoneBookForm() {
             required
             value={contactName}
             onChange={handlerChenge}
-            className={css.formInput}
+            // className={css.formInput}
           />
         </label>
         <label htmlFor="">
@@ -86,11 +74,14 @@ export function PhoneBookForm() {
             required
             value={contactNumber}
             onChange={handlerChenge}
-            className={css.formInput}
+            // className={css.formInput}
           />
         </label>
-        <button type="submit" className={css.button}>
-          Add contact
+        <button
+          type="submit"
+          // className={css.button}
+        >
+          Change contact
         </button>
       </form>
     </div>
