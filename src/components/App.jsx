@@ -14,6 +14,7 @@ import UserMenu from './UserMenu/UserMenu';
 import { handleFullfild } from 'redux/auth/slice';
 import { useDispatch } from 'react-redux';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import PublicRoute from './PublicRoute/PublicRoute';
 
 export function App() {
   return (
@@ -36,10 +37,31 @@ export function App() {
             </PrivateRoute>
           }
         ></Route>
-        <Route path="register" element={<SignUpPage />}></Route>
-        <Route path="login" element={<LogInPage />}></Route>
+        <Route
+          path="register"
+          element={
+            <PublicRoute>
+              <SignUpPage />
+            </PublicRoute>
+          }
+        ></Route>{' '}
+        <Route
+          path="login"
+          element={
+            <PublicRoute>
+              <LogInPage />
+            </PublicRoute>
+          }
+        ></Route>
       </Route>
-      <Route path="/usermenu" element={<UserMenu />} />
+      <Route
+        path="/usermenu"
+        element={
+          <PrivateRoute>
+            <UserMenu />
+          </PrivateRoute>
+        }
+      />
 
       <Route path="*" element={<Navigation />} />
     </Routes>

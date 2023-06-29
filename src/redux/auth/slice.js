@@ -31,6 +31,7 @@ const handleFullfildProfile = (state, action) => {
 const handleLogOut = (state, action) => {
   state.isLoading = false;
   state.error = null;
+  state.profile = '';
   state.access_token = '';
 };
 

@@ -30,7 +30,7 @@ export default function LogInPage() {
       .unwrap()
       .then(() => {
         Notiflix.Notify.success('Login success');
-        navigate('/contacts');
+        // navigate('/contacts');
       })
       .catch(error => {
         Notiflix.Notify.failure('Login error');
