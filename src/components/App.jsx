@@ -6,9 +6,9 @@ import { Navigation } from './Navigation/Navigation';
 
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
-import UserMenu from './UserMenu/UserMenu';
-import SignUpPage from './signUp/SignUp';
-import LogInPage from './LogInPage/LogInPage';
+import UserMenu from './UserMenu/UserMenu.jsx';
+import SignUpPage from './signUp/SignUp.jsx';
+import LogInPage from './LogInPage/LogInPage.jsx';
 import PhoneBookMain from './phoneBookMain/PhoneBookMain.jsx';
 
 export function App() {
