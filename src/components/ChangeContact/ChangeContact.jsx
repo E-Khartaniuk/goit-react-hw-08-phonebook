@@ -1,14 +1,15 @@
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  changeContactThunk,
-  getContactsThunk,
-} from 'redux/contacts/contactsThunk';
-import { editContact } from 'redux/store';
-// import { changeContactThunk, editContact, getContacts } from 'redux/store';
+  editContact,
+  // getContacts
+} from 'redux/store';
+
+import ChangeContactCss from './ChangeContact.module.css';
+import { changeContactThunk, getContacts } from 'redux/contacts/contactsThunk';
 
 export default function ChangeContact() {
-  // const state = useSelector(state => state.contacts);
   const contactForEditing = useSelector(
     state => state.contacts.contacts.editedContact
   );
@@ -37,18 +38,24 @@ export default function ChangeContact() {
     event.preventDefault();
 
     dispatch(changeContactThunk(chengedContactData)).then(() => {
-      dispatch(getContactsThunk());
+      dispatch(getContacts());
       dispatch(editContact(null));
     });
   };
   return (
     <div>
-      <form action="" onSubmit={handleSubmit}>
+      <form
+        action=""
+        onSubmit={handleSubmit}
+        className={ChangeContactCss.changeContact}
+      >
         {' '}
         <label htmlFor="">
           {' '}
-          Name
-          <input
+          <TextField
+            id="outlined-basic"
+            label="New name"
+            variant="outlined"
             type="text"
             name="name"
             // pattern="/^[a-zA-Zа-яА-Я]+(([\' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/"
@@ -56,12 +63,14 @@ export default function ChangeContact() {
             required
             value={contactName}
             onChange={handleChange}
-            // className={css.formInput}
+            className={ChangeContactCss.formInput}
           />
         </label>
         <label htmlFor="">
-          Number
-          <input
+          <TextField
+            id="outlined-basic"
+            label="New number"
+            variant="outlined"
             type="tel"
             name="number"
             // pattern="/\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/"
@@ -69,15 +78,16 @@ export default function ChangeContact() {
             required
             value={contactNumber}
             onChange={handleChange}
-            // className={css.formInput}
+            className={ChangeContactCss.formInput}
           />
         </label>
-        <button
+        <Button
+          variant="outlined"
           type="submit"
-          // className={css.button}
+          className={ChangeContactCss.changeContactBtn}
         >
           Change contact
-        </button>
+        </Button>
       </form>
     </div>
   );

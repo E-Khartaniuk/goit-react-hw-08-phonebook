@@ -1,10 +1,16 @@
 import React from 'react';
 import css from './ContactListItem.module.css';
+
+import Button from '@mui/material/Button';
+
+import ListItem from '@mui/material/ListItem';
+
 import { useDispatch, useSelector } from 'react-redux';
 // import { deleteContactThunk, editContact } from 'redux/store';
 import ChangeContact from 'components/ChangeContact/ChangeContact';
-import { deleteContactThunk } from 'redux/contacts/contactsThunk';
+// import { deleteContactThunk } from 'redux/contacts/contactsThunk';
 import { editContact } from 'redux/store';
+import { deleteContactThunk } from 'redux/contacts/contactsThunk';
 
 export default function ContactListItem({ contact }) {
   const dispatch = useDispatch();
@@ -28,23 +34,33 @@ export default function ContactListItem({ contact }) {
   const number = contact.number;
 
   return (
-    <li className={css.listItem}>
+    <ListItem disablePadding className={css.listItem}>
       {contactForEditing?.id === contact?.id ? (
         <div>
           <ChangeContact key={contact.id}></ChangeContact>
         </div>
       ) : (
         <div>
-          {name}: {number}
+          <p className={css.contactData}>
+            {name}: {number}
+          </p>
         </div>
       )}
 
-      <button onClick={hendlerDeleteContact} className={css.button}>
+      <Button
+        variant="outlined"
+        onClick={hendlerDeleteContact}
+        className={css.button}
+      >
         Delete
-      </button>
-      <button onClick={hendlerEditContact} className={css.button}>
+      </Button>
+      <Button
+        variant="outlined"
+        onClick={hendlerEditContact}
+        className={css.button}
+      >
         {contactForEditing?.id === contact?.id ? 'close' : 'Edit'}
-      </button>
-    </li>
+      </Button>
+    </ListItem>
   );
 }

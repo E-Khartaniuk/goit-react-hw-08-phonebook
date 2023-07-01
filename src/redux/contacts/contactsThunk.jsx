@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
-  fetchContacts,
   addContact,
-  deleteContact,
   changeContact,
-} from 'redux/store';
+  deleteContact,
+  fetchContacts,
+} from 'redux/actions';
 
-export const getContactsThunk = createAsyncThunk(
+export const getContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkApi) => {
     try {
@@ -23,7 +23,7 @@ export const changeContactThunk = createAsyncThunk(
   async (changedContactData, { dispatch }) => {
     try {
       await changeContact(changedContactData);
-      dispatch(getContactsThunk());
+      dispatch(getContacts());
     } catch (error) {
       return error;
     }

@@ -1,6 +1,6 @@
 import { signUp } from 'components/api/auth';
 import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUpPage() {
   const [name, setName] = useState('');
@@ -28,7 +28,6 @@ export default function SignUpPage() {
     } else if (name === 'password') {
       setPassword(value);
     }
-    console.log('name:', name, 'email:', email, 'password:', password);
   };
 
   return (

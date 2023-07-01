@@ -1,16 +1,17 @@
-// import { logIn } from 'components/api/auth';
 import Notiflix from 'notiflix';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { loginThunk } from 'redux/auth/thunk';
 
 export default function LogInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const navigate = useNavigate();
-  const isAuth = useSelector(state => state.auth.access_token);
 
   const dispatch = useDispatch();
 
@@ -30,41 +31,49 @@ export default function LogInPage() {
       .unwrap()
       .then(() => {
         Notiflix.Notify.success('Login success');
-        // navigate('/contacts');
       })
-      .catch(error => {
+      .catch(() => {
         Notiflix.Notify.failure('Login error');
       });
   };
 
-  // useEffect(() => {
-  //   isAuth && navigate('/contacts');
-  //  }, [isAuth]);
-
-  // if (!isAuth) {
-  //   return;
-  // }
-
   return (
     <>
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+      ></Box>
       <h3>Login</h3>
       <form action="submit" autoComplete="on" onSubmit={handleSubmit}>
         <h4>email</h4>
-        <input
+        <TextField
+          id="outlined-basic"
+          label="email"
+          variant="outlined"
           autoComplete="email"
-          type="email"
           name="email"
           onChange={handleChenge}
           value={email}
         />
         <h4>password</h4>
-        <input
+        <TextField
+          id="outlined-basic"
+          label="password"
+          variant="outlined"
           type="text"
           name="password"
           onChange={handleChenge}
           value={password}
         />
-        <button type="submit">registration</button>
+        <Stack spacing={2} direction="row">
+          <Button variant="contained" type="submit">
+            registration
+          </Button>
+        </Stack>
       </form>
     </>
   );

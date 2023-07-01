@@ -1,46 +1,26 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 
-import { instance } from 'components/api/auth';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
 
 import {
   changeContactThunk,
   deleteContactThunk,
-  getContactsThunk,
+  getContacts,
   postContact,
 } from './contacts/contactsThunk';
-
-export const fetchContacts = async () => {
-  const { data } = await instance.get('/contacts');
-
-  return data;
-};
-
-export const addContact = async contactData => {
-  const addcontactToDB = await instance.post('/contacts', {
-    ...contactData,
-  });
-
-  return addcontactToDB;
-};
-
-export const deleteContact = async id => {
-  const deleteContactFromDB = await instance.delete(`/contacts/${id}`);
-
-  return deleteContactFromDB;
-};
-
-export const changeContact = async body => {
-  const { data } = await instance.patch(`/contacts/${body.id}`, {
-    name: body.name,
-    number: body.number,
-  });
-
-  return data;
-};
 
 const initialState = {
   contacts: {
@@ -82,7 +62,7 @@ export const phoneBookSlice = createSlice({
   extraReducers: builder =>
     builder
       // ------ FETCH Contats
-      .addCase(getContactsThunk.fulfilled, (state, action) => {
+      .addCase(getContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.contacts.items = action.payload;
       })
@@ -127,6 +107,12 @@ export const store = configureStore({
     contacts: contactReducer,
     auth: persistedReducer,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);

@@ -1,0 +1,14 @@
+.changeContact {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+.formInput {
+  width: 200px;
+  justify-content: space-between;
+}
+.changeContactBtn {
+  margin-right: 15px;
+  width: 150px;
+  padding: 0;
+}

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 // import csstitle from './styleMain/styleMaine.module.css';
 
 import css from './PhoneBookForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { Box, Button, Stack, TextField } from '@mui/material';
 import { postContact } from 'redux/contacts/contactsThunk';
-// import { postContact } from 'redux/store';
-// import { handleFullfild } from 'redux/auth/slice';
-// import { addContactAction } from 'components/actions';
-// import { addContact } from 'redux/store';
 
 export function PhoneBookForm() {
   const [contactName, setContactName] = useState('');
@@ -51,11 +49,15 @@ export function PhoneBookForm() {
 
   return (
     <div>
-      <h3
-      // className={csstitle.title}
-      >
-        Phone book
-      </h3>
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+      ></Box>
+      <h3>Phone book</h3>
       <form
         action=""
         autoComplete="on"
@@ -65,8 +67,11 @@ export function PhoneBookForm() {
         {' '}
         <label htmlFor="" className={css.formLable}>
           {' '}
-          Name
-          <input
+          {/* Name */}
+          <TextField
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
             type="text"
             name="name"
             // pattern="/^[a-zA-Zа-яА-Я]+(([\' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/"
@@ -77,9 +82,12 @@ export function PhoneBookForm() {
             className={css.formInput}
           />
         </label>
-        <label htmlFor="">
-          Number
-          <input
+        <label htmlFor="" className={css.formLable}>
+          {/* Number */}
+          <TextField
+            id="outlined-basic"
+            label="Number"
+            variant="outlined"
             type="tel"
             name="number"
             // pattern="/\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/"
@@ -90,9 +98,14 @@ export function PhoneBookForm() {
             className={css.formInput}
           />
         </label>
-        <button type="submit" className={css.button}>
+        <Stack spacing={2} direction="row" className={css.button}>
+          <Button variant="contained" type="submit">
+            Add contact
+          </Button>
+        </Stack>
+        {/* <button type="submit" className={css.button}>
           Add contact
-        </button>
+        </button> */}
       </form>
     </div>
   );

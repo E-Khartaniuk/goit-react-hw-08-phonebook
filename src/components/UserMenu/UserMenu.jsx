@@ -1,4 +1,5 @@
-import { dellToken, logOut } from 'components/api/auth';
+import { Button, Stack } from '@mui/material';
+import { dellToken } from 'components/api/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutThunk } from 'redux/auth/thunk';
 
@@ -17,9 +18,11 @@ export default function UserMenu() {
     isAuth && (
       <div>
         <p>{profile.name}</p>
-        <button type="button" onClick={handleLogOut}>
-          Logout
-        </button>
+        <Stack spacing={2} direction="row" onClick={handleLogOut}>
+          <Button variant="contained" type="button">
+            Logout
+          </Button>
+        </Stack>
       </div>
     )
   );

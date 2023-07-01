@@ -1,36 +1,35 @@
 import ContactListItem from 'components/ContactListItem/ContactListItem';
 import React, { useEffect } from 'react';
 import css from './ContactList.module.css';
-// import csstitle from './styleMain/styleMaine.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContactsThunk } from 'redux/contacts/contactsThunk';
 // import { getContacts } from 'redux/store';
+import { Box, Typography } from '@mui/material';
+import { getContacts } from 'redux/contacts/contactsThunk';
 
 export default function ContactList() {
-  const isAuth = useSelector(state => state.auth.access_token);
+  // const isAuth = useSelector(state => state.auth.access_token);
+  const profile = useSelector(state => state.auth.profile);
 
   const contacts = useSelector(store => store.contacts.contacts.items);
   const filterValue = useSelector(state => state.contacts.filter);
-  // console.log('all contacts from state', contacts);
-  // console.log('filterValue from state', filterValue);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    isAuth && dispatch(getContactsThunk());
-  }, [dispatch, isAuth]);
+    if (!profile) return;
+    dispatch(getContacts());
+  }, [dispatch, profile]);
 
   if (contacts === null) {
     return null;
   }
 
   return (
-    <div className="contactList">
-      <h4
-      // className={csstitle.titleSecond}
-      >
+    <div className={css.contactList}>
+      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
         Contacts
-      </h4>
+      </Typography>
+
       <ul className={css.contactList}>
         {contacts
           .filter(contact => {
@@ -43,10 +42,19 @@ export default function ContactList() {
           })
           .map(contact => {
             return (
-              <ContactListItem
-                contact={contact}
+              <Box
                 key={contact.id}
-              ></ContactListItem>
+                sx={{
+                  width: '100%',
+                  maxWidth: 360,
+                  bgcolor: 'background.paper',
+                }}
+              >
+                <ContactListItem
+                  contact={contact}
+                  // key={contact.id}
+                ></ContactListItem>
+              </Box>
             );
           })}
       </ul>
