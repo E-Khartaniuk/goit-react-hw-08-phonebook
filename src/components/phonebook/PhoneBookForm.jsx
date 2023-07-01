@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { postContact } from 'redux/contacts/contactsThunk';
 
-export function PhoneBookForm() {
+export default function PhoneBookForm() {
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const state = useSelector(state => state.contacts);

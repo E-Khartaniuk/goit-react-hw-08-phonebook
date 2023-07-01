@@ -6,10 +6,10 @@ import { Navigation } from './Navigation/Navigation';
 
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
-import PhoneBookMain from './phoneBookMain/PhoneBookMain';
 import UserMenu from './UserMenu/UserMenu';
 import SignUpPage from './signUp/SignUp';
 import LogInPage from './LogInPage/LogInPage';
+import PhoneBookMain from './phoneBookMain/PhoneBookMain';
 
 export function App() {
   return (
@@ -20,9 +20,9 @@ export function App() {
         <Route
           path="contacts"
           element={
-            // <PrivateRoute>
-            <PhoneBookMain />
-            // </PrivateRoute>
+            <PrivateRoute>
+              <PhoneBookMain />
+            </PrivateRoute>
           }
         ></Route>
         <Route
