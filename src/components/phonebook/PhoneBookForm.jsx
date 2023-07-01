@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 
 import css from './PhoneBookForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { postContact } from 'redux/store';
-import { handleFullfild } from 'redux/auth/slice';
+import { postContact } from 'redux/contacts/contactsThunk';
+// import { postContact } from 'redux/store';
+// import { handleFullfild } from 'redux/auth/slice';
 // import { addContactAction } from 'components/actions';
 // import { addContact } from 'redux/store';
 

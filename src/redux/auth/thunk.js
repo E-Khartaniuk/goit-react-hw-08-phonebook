@@ -1,6 +1,9 @@
+import { getContactsThunk } from 'redux/contacts/contactsThunk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getProfile, logIn, logOut } from 'components/api/auth';
-import { getContacts } from 'redux/store';
+
+// import { getContacts } from 'redux/contacts/contactsThunk';
+// import { getContacts } from 'redux/store';
 
 export const getProfileThunk = createAsyncThunk('auth/current', () => {
   console.log('getProfileThunk');
@@ -13,7 +16,7 @@ export const loginThunk = createAsyncThunk(
     try {
       const data = await logIn(body);
       dispatch(getProfileThunk());
-      dispatch(getContacts());
+      dispatch(getContactsThunk());
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);

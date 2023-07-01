@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import css from './ContactList.module.css';
 // import csstitle from './styleMain/styleMaine.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/store';
+import { getContactsThunk } from 'redux/contacts/contactsThunk';
+// import { getContacts } from 'redux/store';
 
 export default function ContactList() {
   const isAuth = useSelector(state => state.auth.access_token);
@@ -16,7 +17,7 @@ export default function ContactList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    isAuth && dispatch(getContacts());
+    isAuth && dispatch(getContactsThunk());
   }, [dispatch, isAuth]);
 
   if (contacts === null) {

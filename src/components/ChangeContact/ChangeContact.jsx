@@ -1,54 +1,49 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeContact, changeContactThunk, getContacts } from 'redux/store';
+import {
+  changeContactThunk,
+  getContactsThunk,
+} from 'redux/contacts/contactsThunk';
+import { editContact } from 'redux/store';
+// import { changeContactThunk, editContact, getContacts } from 'redux/store';
 
-export default function ChangeContact({ id }) {
-  const [contactName, setContactName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const state = useSelector(state => state.contacts);
+export default function ChangeContact() {
+  // const state = useSelector(state => state.contacts);
+  const contactForEditing = useSelector(
+    state => state.contacts.contacts.editedContact
+  );
+
+  const [contactName, setContactName] = useState(contactForEditing?.name ?? '');
+  const [contactNumber, setContactNumber] = useState(
+    contactForEditing?.number ?? ''
+  );
 
   const chengedContactData = {
-    id,
+    id: contactForEditing.id,
     name: contactName,
     number: contactNumber,
   };
 
   const dispatch = useDispatch();
-  // const id = key;
 
-  // useEffect(() => {
-  //   if (id) {
-  //     dispatch(changeContactThunk(chengedContactData)).then(() => {
-  //       dispatch(getContacts());
-  //     });
-  //   }
-  // }, [dispatch, id, chengedContactData]);
-
-  const handlerChenge = event => {
+  const handleChange = event => {
     const { value } = event.currentTarget;
     event.currentTarget.name === 'name'
       ? setContactName(value)
       : setContactNumber(value);
   };
-  const clearForm = () => {
-    setContactName('');
-    setContactNumber('');
-  };
 
-  const handlerSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    // console.log('in chenge contact', id, chengedContactData);
-
     dispatch(changeContactThunk(chengedContactData)).then(() => {
-      dispatch(getContacts());
-      clearForm();
+      dispatch(getContactsThunk());
+      dispatch(editContact(null));
     });
   };
   return (
     <div>
-      <h3>Chenge contact</h3>
-      <form action="" onSubmit={handlerSubmit}>
+      <form action="" onSubmit={handleSubmit}>
         {' '}
         <label htmlFor="">
           {' '}
@@ -60,7 +55,7 @@ export default function ChangeContact({ id }) {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             value={contactName}
-            onChange={handlerChenge}
+            onChange={handleChange}
             // className={css.formInput}
           />
         </label>
@@ -73,7 +68,7 @@ export default function ChangeContact({ id }) {
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             value={contactNumber}
-            onChange={handlerChenge}
+            onChange={handleChange}
             // className={css.formInput}
           />
         </label>

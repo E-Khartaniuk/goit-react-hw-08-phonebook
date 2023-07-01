@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { getContacts } from 'redux/store';
+import { getContactsThunk } from 'redux/contacts/contactsThunk';
+// import { getContacts } from 'redux/store';
 
 export const instance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
@@ -32,6 +33,6 @@ export const logOut = async () => {
 export const logIn = async body => {
   const { data } = await instance.post('/users/login', body);
   if ('token' in data) setToken(data.token);
-  getContacts();
+  getContactsThunk();
   return data;
 };

@@ -1,14 +1,17 @@
-import {
-  configureStore,
-  createAsyncThunk,
-  createSlice,
-} from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 
 import { instance } from 'components/api/auth';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
+
+import {
+  changeContactThunk,
+  deleteContactThunk,
+  getContactsThunk,
+  postContact,
+} from './contacts/contactsThunk';
 
 export const fetchContacts = async () => {
   const { data } = await instance.get('/contacts');
@@ -35,66 +38,16 @@ export const changeContact = async body => {
     name: body.name,
     number: body.number,
   });
-  // console.log('changeContact', data);
 
   return data;
 };
-
-export const changeContactThunk = createAsyncThunk(
-  'contacts/changeContact',
-  async (chengedContactData, { dispatch }) => {
-    // console.log('chengeeeeeeThunk', chengedContactData);
-    try {
-      changeContact(chengedContactData);
-      dispatch(getContacts());
-    } catch (error) {
-      return error;
-    }
-  }
-);
-
-export const deleteContactThunk = createAsyncThunk(
-  'contacts/deleteContact',
-  async (id, thunkApi) => {
-    try {
-      await deleteContact(id);
-      return id;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const getContacts = createAsyncThunk(
-  'contacts/fetchAll',
-  async (_, thunkApi) => {
-    try {
-      const response = fetchContacts();
-
-      return response;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const postContact = createAsyncThunk(
-  'contacts/addContact',
-  async (contactData, thunkApi) => {
-    try {
-      const { data } = await addContact(contactData);
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
 
 const initialState = {
   contacts: {
     items: [],
     isLoading: false,
     error: null,
+    editedContact: null,
   },
   filter: '',
 };
@@ -122,11 +75,14 @@ export const phoneBookSlice = createSlice({
         filter: action.payload.toLowerCase(),
       };
     },
+    editContact: (state, action) => {
+      state.contacts.editedContact = action.payload;
+    },
   },
   extraReducers: builder =>
     builder
       // ------ FETCH Contats
-      .addCase(getContacts.fulfilled, (state, action) => {
+      .addCase(getContactsThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.contacts.items = action.payload;
       })
@@ -156,7 +112,7 @@ export const phoneBookSlice = createSlice({
 });
 
 export const contactReducer = phoneBookSlice.reducer;
-export const { filter } = phoneBookSlice.actions;
+export const { filter, editContact } = phoneBookSlice.actions;
 
 const percistConfig = {
   key: 'token',
