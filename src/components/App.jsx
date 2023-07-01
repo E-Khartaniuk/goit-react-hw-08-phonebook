@@ -20,9 +20,9 @@ export function App() {
         <Route
           path="contacts"
           element={
-            <PrivateRoute>
-              <PhoneBookMain />
-            </PrivateRoute>
+            // <PrivateRoute>
+            <PhoneBookMain />
+            // </PrivateRoute>
           }
         ></Route>
         <Route
