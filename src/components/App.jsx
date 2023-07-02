@@ -4,12 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage/HomePage';
 import { Navigation } from './Navigation/Navigation';
 
-import PrivateRoute from 'PrivateRoute/PrivateRoute';
-import PublicRoute from 'PublicRoute/PublicRoute';
-import UserMenu from 'UserMenu/UserMenu';
-import LogInPage from 'LogInPage/LogInPage';
-import PhoneBookMain from 'PhoneBookMain/PhoneBookMain';
-import SignUpPage from 'signUp/SignUp';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import PublicRoute from './PublicRoute/PublicRoute';
+import UserMenu from './UserMenu/UserMenu';
+import LogInPage from './LogInPage/LogInPage';
+// import PhoneBookMain from './PhoneBookMain/PhoneBookMain';
+import SignUpPage from './signUp/SignUp';
+import PhoneBookContainer from './PhoneBookContainer/PhoneBookContainer';
 
 export function App() {
   return (
@@ -17,20 +18,21 @@ export function App() {
       <Route path="/" element={<Navigation />}>
         <Route index element={<HomePage />} />
         <Route path="usermenu" element={<UserMenu />}></Route>
+      </Route>
+      <Route
+        path="contacts"
+        element={
+          <PrivateRoute>
+            <PhoneBookContainer />
+          </PrivateRoute>
+        }
+      >
         <Route
           path="register"
           element={
             <PublicRoute>
               <SignUpPage />
             </PublicRoute>
-          }
-        ></Route>
-        <Route
-          path="contacts"
-          element={
-            <PrivateRoute>
-              <PhoneBookMain />
-            </PrivateRoute>
           }
         ></Route>{' '}
         <Route
