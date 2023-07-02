@@ -18,19 +18,19 @@ export function App() {
         <Route index element={<HomePage />} />
         <Route path="usermenu" element={<UserMenu />}></Route>
         <Route
-          path="contacts"
-          element={
-            <PrivateRoute>
-              <PhoneBookMain />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
           path="register"
           element={
             <PublicRoute>
               <SignUpPage />
             </PublicRoute>
+          }
+        ></Route>
+        <Route
+          path="contacts"
+          element={
+            <PrivateRoute>
+              <PhoneBookMain />
+            </PrivateRoute>
           }
         ></Route>{' '}
         <Route
