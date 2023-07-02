@@ -1,16 +1,15 @@
 import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './HomePage/HomePage';
+import HomePage from '../pages/HomePage';
 import { Navigation } from './Navigation/Navigation';
 
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
-import UserMenu from './UserMenu/UserMenu';
-import LogInPage from './LogInPage/LogInPage';
-// import PhoneBookMain from './PhoneBookMain/PhoneBookMain';
-import SignUpPage from './SignUp/SignUp';
-import PhoneBookContainer from './PhoneBookContainer/PhoneBookContainer';
+import UserMenu from '../pages/UserMenu';
+import SignUpPage from '../pages/SignUp';
+import PhoneBookContainer from '../pages/PhoneBookContainer';
+import LogInPage from '../pages/LogInPage';
 
 export function App() {
   return (
