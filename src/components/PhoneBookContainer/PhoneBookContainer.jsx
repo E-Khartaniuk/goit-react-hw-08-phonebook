@@ -2,7 +2,7 @@ import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import PhoneBookForm from 'components/Phonebook/PhoneBookForm';
 
-function PhoneBookContainer() {
+export default function PhoneBookContainer() {
   return (
     <>
       <PhoneBookForm />
@@ -11,4 +11,3 @@ function PhoneBookContainer() {
     </>
   );
 }
-export default PhoneBookContainer;
