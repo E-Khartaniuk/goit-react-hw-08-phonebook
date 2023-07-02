@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import { Navigation } from './Navigation/Navigation';
+import { Navigation } from '../components/Navigation/Navigation';
 
-import PrivateRoute from './PrivateRoute/PrivateRoute';
-import PublicRoute from './PublicRoute/PublicRoute';
-import UserMenu from './UserMenu/UserMenu';
+import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
+import PublicRoute from '../components/PublicRoute/PublicRoute';
+import UserMenu from '../components/UserMenu/UserMenu';
 import LogInPage from 'pages/LogInPage';
 import SignUpPage from 'pages/SignUp';
 import PhoneBookMain from 'pages/PhoneBookMain';
