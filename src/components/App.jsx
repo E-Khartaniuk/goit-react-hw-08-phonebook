@@ -9,7 +9,7 @@ import PublicRoute from './PublicRoute/PublicRoute';
 import UserMenu from './UserMenu/UserMenu';
 import LogInPage from './LogInPage/LogInPage';
 // import PhoneBookMain from './PhoneBookMain/PhoneBookMain';
-import SignUpPage from './signUp/SignUp';
+import SignUpPage from './SignUp/SignUp';
 import PhoneBookContainer from './PhoneBookContainer/PhoneBookContainer';
 
 export function App() {
