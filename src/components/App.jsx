@@ -18,6 +18,7 @@ export function App() {
         <Route index element={<HomePage />} />
         <Route path="usermenu" element={<UserMenu />}></Route>
       </Route>
+
       <Route
         path="contacts"
         element={
@@ -25,24 +26,23 @@ export function App() {
             <PhoneBookContainer />
           </PrivateRoute>
         }
-      >
-        <Route
-          path="register"
-          element={
-            <PublicRoute>
-              <SignUpPage />
-            </PublicRoute>
-          }
-        ></Route>{' '}
-        <Route
-          path="login"
-          element={
-            <PublicRoute>
-              <LogInPage />
-            </PublicRoute>
-          }
-        ></Route>
-      </Route>
+      ></Route>
+      <Route
+        path="register"
+        element={
+          <PublicRoute>
+            <SignUpPage />
+          </PublicRoute>
+        }
+      ></Route>
+      <Route
+        path="login"
+        element={
+          <PublicRoute>
+            <LogInPage />
+          </PublicRoute>
+        }
+      ></Route>
       <Route
         path="/usermenu"
         element={
@@ -50,7 +50,41 @@ export function App() {
             <UserMenu />
           </PrivateRoute>
         }
-      />
+      ></Route>
+
+      {/* <Route
+        path="contacts"
+        element={
+          <PrivateRoute>
+            <PhoneBookContainer />
+          </PrivateRoute>
+        }
+      > */}
+      {/* <Route
+          path="register"
+          element={
+            <PublicRoute>
+              <SignUpPage />
+            </PublicRoute>
+          }
+        ></Route>{' '} */}
+      {/* <Route
+          path="login"
+          element={
+            <PublicRoute>
+              <LogInPage />
+            </PublicRoute>
+          }
+        ></Route> */}
+      {/* </Route>
+      <Route
+        path="/usermenu"
+        element={
+          <PrivateRoute>
+            <UserMenu />
+          </PrivateRoute>
+        } */}
+      {/* /> */}
 
       <Route path="*" element={<Navigation />} />
     </Routes>
