@@ -4,12 +4,12 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage/HomePage';
 import { Navigation } from './Navigation/Navigation';
 
-import PrivateRoute from './PrivateRoute/PrivateRoute';
-import PublicRoute from './PublicRoute/PublicRoute';
-import UserMenu from './UserMenu/UserMenu';
-import LogInPage from './LogInPage/LogInPage';
+import PrivateRoute from 'PrivateRoute/PrivateRoute';
+import PublicRoute from 'PublicRoute/PublicRoute';
+import UserMenu from 'UserMenu/UserMenu';
+import LogInPage from 'LogInPage/LogInPage';
 import PhoneBookMain from 'PhoneBookMain/PhoneBookMain';
-import SignUpPage from './signUp/SignUp';
+import SignUpPage from 'signUp/SignUp';
 
 export function App() {
   return (
