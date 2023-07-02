@@ -4,10 +4,10 @@ import PhoneBookForm from 'components/phonebook/PhoneBookForm';
 
 export default function PhoneBookMain() {
   return (
-    <>
+    <div>
       <PhoneBookForm />
       <Filter />
       <ContactList />
-    </>
+    </div>
   );
 }
